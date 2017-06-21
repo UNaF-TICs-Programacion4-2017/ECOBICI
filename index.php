@@ -12,11 +12,10 @@ require 'vendor/autoload.php';
 
 $error_404 = new \Slim\Container();
 
-
 //Configuro el error 404, en caso que no encuentre
 $error_404['notFoundHandler'] = function ($error_404) {
     return function ($request, $response) use ($error_404) {
-        $mensaje = Array('Status'=>404,'Mensaje'=>'Recurso no existe');
+        $mensaje = Array('Status'=>404,'Mensaje'=>'Recurso no existe.');
         return $error_404['response']
             ->withStatus(404)
             ->withHeader('Content-Type', 'application/json')
