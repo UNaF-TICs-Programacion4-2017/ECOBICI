@@ -11,7 +11,6 @@ require 'vendor/autoload.php';
 $error_404 = new \Slim\Container();
 $app = new \Slim\App($error_404);
 
-
 //controllers
 require "controllers/usuarios_controller.php";
 $usuarios = new Usuarios_controller();
@@ -28,14 +27,10 @@ $error_404['notFoundHandler'] = function ($error_404) {
     };
 };
 
-
-
 //Metdhod Get
 $app->get('/',function(Request $request,Response $response){
-
   $data = array('api' => 'Ecobicix', 'version' => "0.1.1","Grupo"=>"Tacuara","Provincia"=>"Formosa","Facultad"=>"FAEN");
   $response->write(json_encode($data));
-
 });
 
 
@@ -43,33 +38,19 @@ $app->get('/usuarios', function (Request $request, Response $response) use($app,
     $usuarios->getUsuarios();
 });
 
-$app->get('/usuarios/{iduser}', function (Request $request, Response $response) {
+$app->get('/usuarios/{iduser}', function (Request $request, Response $response) use($app,$usuarios) {
     $iduser = $request->getAttribute('iduser');
-
+    $usuarios->getUsuarioId($iduser);
 });
-
 
 
 $app->get('/bicicletas', function (Request $request, Response $response) {
     echo "Bicis";
-
 });
-
-
 
 $app->get('/bicicletas/{id}', function (Request $request, Response $response) {
-
-    $id      = $request->getAttribute('id');
-
-
+    $id= $request->getAttribute('id');
 });
-
-
-
-
-
-
-
 
 $app->get('/usuarios/{iduser}/bicicleta/{idbicicleta}', function (Request $request, Response $response) {
     $iduser = $request->getAttribute('iduser');

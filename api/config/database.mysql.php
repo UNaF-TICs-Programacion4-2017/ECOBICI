@@ -40,7 +40,7 @@ class DatabaseMysqlConfig{
       while($this->rows[] = $this->resultados->fetch_assoc());
       $this->resultados->close();
       $this->close_conexion();
-      array_pop($this->rows);
+
     }
 
 }
