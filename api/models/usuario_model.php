@@ -1,7 +1,7 @@
 <?php
 /*
 *@Api : Ecobicix
-* Model Usuario
+* Modelo Usuario
 */
 
 
@@ -18,22 +18,20 @@ class Usuario_model extends DatabaseMysqlConfig{
       return $this->rows;
     }
 
-
     //Un usuario especifico ID
     public function getDataUserId($idUsuario){
+        $this->query = "SELECT persona.nombre,persona.apellido,persona.direccion,usuarios.usuarios,usuarios.idusuarios
+                        FROM usuarios_personas
+                        INNER JOIN usuarios ON usuarios.idusuarios = usuarios_personas.usuarios_idusuarios
+                        INNER JOIN persona ON persona.idpersona    = usuarios_personas.persona_idpersona
+                        WHERE      usuarios_personas.usuarios_idusuarios = '$idUsuario'";
+        $this->get_results_from_query();
 
-      $this->query = "SELECT persona.nombre,persona.apellido,persona.direccion,usuarios.usuarios,usuarios.idusuarios
-                      FROM usuarios_personas
-                      INNER JOIN usuarios ON usuarios.idusuarios = usuarios_personas.usuarios_idusuarios
-                      INNER JOIN persona ON persona.idpersona = usuarios_personas.persona_idpersona
-                      WHERE   usuarios_personas.usuarios_idusuarios = '$idUsuario'";
-      $this->get_results_from_query();
-
-      if(count($this->rows) ==2){
-        print_r(json_encode($this->rows));
-      }else{
-        print_r(json_encode(Array("Mensaje"=>"No existe el usuario con el id ".$idUsuario)));
-      }
+        if(count($this->rows) ==2){
+          print_r(json_encode($this->rows));
+        }else{
+          print_r(json_encode(Array("Mensaje"=>"No existe el usuario con el id ".$idUsuario)));
+        }
     }
 
 }

@@ -13,8 +13,11 @@ $app = new \Slim\App($error_404);
 
 //controllers
 require "controllers/usuarios_controller.php";
-$usuarios = new Usuarios_controller();
+require "controllers/bicicletas_controller.php";
 
+//instance object
+$usuarios = new Usuarios_controller();
+$bicicletas = new Bicicletas_controller();
 
 //Configuro el error 404, en caso que no encuentre
 $error_404['notFoundHandler'] = function ($error_404) {
@@ -34,24 +37,28 @@ $app->get('/',function(Request $request,Response $response){
 });
 
 
+//todos los usuarios registrados en el sistema
 $app->get('/usuarios', function (Request $request, Response $response) use($app,$usuarios) {
     $usuarios->getUsuarios();
 });
 
+//Busqueda de un usuario especifico
 $app->get('/usuarios/{iduser}', function (Request $request, Response $response) use($app,$usuarios) {
     $iduser = $request->getAttribute('iduser');
     $usuarios->getUsuarioId($iduser);
 });
 
-
+//Todas las bicicletas registradas en el sitema
 $app->get('/bicicletas', function (Request $request, Response $response) {
-    echo "Bicis";
+    $bicicletas->getBicicletas();
 });
 
+//Busqueda de una bicicleta especifica por ID
 $app->get('/bicicletas/{id}', function (Request $request, Response $response) {
     $id= $request->getAttribute('id');
 });
 
+//Obtener el Info del Usuario mas Info de la bicicleta en caso de cumplir con la  condicion
 $app->get('/usuarios/{iduser}/bicicleta/{idbicicleta}', function (Request $request, Response $response) {
     $iduser = $request->getAttribute('iduser');
     $idbicicleta = $request->getAttribute('idbicicleta');
