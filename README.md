@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.png">
+  <img src="logoinfo.png">
 </p>
 <hr>
 <h2>DASHBOARD</h2>
