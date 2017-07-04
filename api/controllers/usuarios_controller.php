@@ -16,8 +16,6 @@ class Usuarios_controller extends Usuario_model{
     }
 
     public function getUsuarioId($idUsuario){
-
-
       if($idUsuario !='')
       {
           $this->getDataUserId($idUsuario);

@@ -58,6 +58,17 @@ $app->get('/bicicletas/{id}', function (Request $request, Response $response) {
     $id= $request->getAttribute('id');
 });
 
+
+//Buscar el recorrido de una bicicleta
+$app->get('/bicicletas/{id}/recorridos/{fecha}',function(Request $request, Response $response) use($app,$bicicletas){
+    $id    = $request->getAttribute('id');
+    $fecha = $request->getAttribute('fecha');
+    //controller bicileta
+    $bicicletas->getBicicletaRecorrido($id,$fecha);
+});
+
+
+
 //Obtener el Info del Usuario mas Info de la bicicleta en caso de cumplir con la  condicion
 $app->get('/usuarios/{iduser}/bicicleta/{idbicicleta}', function (Request $request, Response $response) {
     $iduser = $request->getAttribute('iduser');

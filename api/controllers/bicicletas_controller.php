@@ -16,4 +16,9 @@ class Bicicletas_controller extends Bicicleta_model{
         print_r(json_encode($this->getDataBicicletas()));
     }
 
+
+    public function getBicicletaRecorrido($id,$fecha){        
+        print_r(json_encode($this->getDataBicicletaRecorrido($id,$fecha)));
+    }
+
 }
